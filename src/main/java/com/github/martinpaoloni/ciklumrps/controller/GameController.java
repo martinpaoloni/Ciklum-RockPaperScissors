@@ -16,7 +16,7 @@ public class GameController {
     private Map<String, Game> games = new HashMap<>();
     private Stats globalStats = new Stats();
 
-    @GetMapping(value = "/api/game/list", produces = "application/json")
+    @GetMapping(value = "/api/game", produces = "application/json")
     public Map<String, Game> listGames() {
         return games;
     }
@@ -26,8 +26,8 @@ public class GameController {
         return globalStats;
     }
 
-    @GetMapping(value = "/api/game", produces = APPLICATION_JSON_VALUE)
-    public Game game(@RequestParam(value = "id", defaultValue = "0") String id) {
+    @GetMapping(value = "/api/game/{id}", produces = APPLICATION_JSON_VALUE)
+    public Game game(@PathVariable(value = "id") String id) {
         return Optional.ofNullable(games.get(id)).orElseThrow(() -> new GameNotFoundException(id));
     }
 
