@@ -10,6 +10,20 @@ public class GameTest {
     private static final int NUMBER_OF_ROUNDS = 10;
 
     @Test
+    public void beanTest() {
+        int id = 10;
+        Player playerOne = new RandomPlayer();
+        Player playerTwo = new RockPlayer();
+        Game game = new Game(id, playerOne, playerTwo);
+        assertEquals(id, game.getId());
+        assertEquals(playerOne, game.getPlayer1());
+        assertEquals(playerTwo, game.getPlayer2());
+        assertEquals(0, game.getRounds().size());
+        game.playRound();
+        assertEquals(1, game.getRounds().size());
+    }
+
+    @Test
     public void playRound() {
         Round roundPlayed = new Game(0, new RandomPlayer(), new RockPlayer()).playRound();
         Round otherRound = new Round(roundPlayed.getPlayer1Play(), roundPlayed.getPlayer2Play());
