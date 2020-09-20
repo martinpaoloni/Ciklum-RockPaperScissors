@@ -5,29 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- JQuery will be required for this demo -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-    <!-- Import Twitter bootstrap libs + css -->
-    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js"></script>
+    <!-- Import Bootstrap libs + css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
     <!-- Keep this simple ... define CSS for this simple webpage in the same file -->
     <style>
-    body {
+      body {
       padding-top: 40px;
       padding-bottom: 40px;
       background-color: #eee;
     }
-    .demo-form {
-      max-width: 500px;
-      padding: 15px;
-      margin: 0 auto;
-    }
-    .demo-form .demo-heading {
-      margin-bottom: 10px;
-    }
-    .centered {
-    width:50%;
-    margin: 0 auto;
-    }
-  </style>
+
+
+    </style>
 </head>
 <body>
 <script type="text/javascript">
@@ -123,60 +116,64 @@
       });
 
     });
-    </script>
+
+</script>
 <div class="container">
-    <h4>Let's play!</h4>
+    <h1>Rock, Paper, Scissors</h1>
     <hr>
-    <div class="panel-group" id="accordion">
+    <h2>Let's play!</h2>
+    <br>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title demo-heading">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#gameDiv">Rock, Paper, Scissors</a>
-                </h2>
-            </div>
-            <div id="gameDiv" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    <form id="gameForm" class="demo-form" role="form" >
-                        <button type="submit" class="btn btn-lg btn-primary btn-block" data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">Play round</button>
-                        <table class="table" id="gameTable">
-                            <thead>
-                            <tr>
-                                <th scope="col">Player one's play</th>
-                                <th scope="col">Player two's play</th>
-                                <th scope="col">Result</th>
-                            </tr>
-                            </thead>
-                            <tbody id="roundsTableBody">
-
-                            </tbody>
-                        </table>
-                    </form>
-                    <form id="statsForm" class="demo-form" role="form" >
-                        <table class="table" id="statsTable">
-                            <thead>
-                            <tr>
-                                <th scope="col">Rounds played</th>
-                                <th scope="col">Player one wins</th>
-                                <th scope="col">Player two wins</th>
-                                <th scope="col">Draws</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td id="roundsPlayed">0</td>
-                                <td id="p1Wins">0</td>
-                                <td id="p2Wins">0</td>
-                                <td id="draws">0</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <button type="submit" class="btn btn-lg btn-primary btn-block" data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">Restart game</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <form id="gameForm" role="form">
+        <button type="submit" class="btn btn-primary "
+                data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">
+            Play round
+        </button>
+        <br><br>
+        <table class="table" id="gameTable">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Player one's play</th>
+                <th scope="col">Player two's play</th>
+                <th scope="col">Result</th>
+            </tr>
+            </thead>
+            <tbody id="roundsTableBody">
+            </tbody>
+        </table>
+    </form>
+    <form id="statsForm" role="form">
+        <table class="table" id="statsTable">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Rounds played</th>
+                <td id="roundsPlayed">0</td>
+            </tr>
+            <tr>
+                <th scope="row">Player one wins</th>
+                <td id="p1Wins">0</td>
+            </tr>
+            <tr>
+                <th scope="row">Player two wins</th>
+                <td id="p2Wins">0</td>
+            </tr>
+            <tr>
+                <th scope="row">Draws</th>
+                <td id="draws">0</td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary"
+                data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">
+            Restart game
+        </button>
+    </form>
 </div>
 </body>
 </html>
