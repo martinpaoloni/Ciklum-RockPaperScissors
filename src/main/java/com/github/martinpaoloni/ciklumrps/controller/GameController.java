@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -16,7 +17,7 @@ public class GameController {
 
     private Map<Integer, Game> games = new HashMap<>();
     private Stats globalStats = new Stats();
-    private int lastIdUsed = 0;
+    private AtomicInteger lastIdUsed = new AtomicInteger();
 
     @GetMapping(value = "/api/game", produces = "application/json")
     public Collection<Game> listGames() {
@@ -52,9 +53,8 @@ public class GameController {
         return game(id).restartGame();
     }
 
-    private synchronized int generateId() {
-        lastIdUsed++;
-        return lastIdUsed;
+    private int generateId() {
+        return lastIdUsed.incrementAndGet();
     }
 
 }
