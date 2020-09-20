@@ -11,14 +11,14 @@ public class GameTest {
 
     @Test
     public void playRound() {
-        Round roundPlayed = new Game(new RandomPlayer(), new RockPlayer()).playRound();
+        Round roundPlayed = new Game(0, new RandomPlayer(), new RockPlayer()).playRound();
         Round otherRound = new Round(roundPlayed.getPlayer1Play(), roundPlayed.getPlayer2Play());
         assertEquals(otherRound, roundPlayed);
     }
 
     @Test
     public void numberOfRounds() {
-        Game game = new Game(new RandomPlayer(), new RockPlayer());
+        Game game = new Game(0, new RandomPlayer(), new RockPlayer());
         for (int i = 0; i < NUMBER_OF_ROUNDS; i++) {
             game.playRound();
         }
@@ -27,13 +27,13 @@ public class GameTest {
 
     @Test
     public void zeroNumberOfRounds() {
-        Game game = new Game(new RandomPlayer(), new RockPlayer());
+        Game game = new Game(0, new RandomPlayer(), new RockPlayer());
         assertEquals(0, game.numberOfRoundsPlayed());
     }
 
     @Test
     public void restartGameRoundsPlayed() {
-        Game game = new Game(new RandomPlayer(), new RockPlayer());
+        Game game = new Game(0, new RandomPlayer(), new RockPlayer());
         game.playRound();
         game.playRound();
         assertEquals(2, game.numberOfRoundsPlayed());
@@ -45,7 +45,7 @@ public class GameTest {
 
     @Test
     public void summary() {
-        Game game = new Game(new RandomPlayer(), new RockPlayer());
+        Game game = new Game(0, new RandomPlayer(), new RockPlayer());
         for (int i = 0; i < NUMBER_OF_ROUNDS; i++) {
             game.playRound();
         }

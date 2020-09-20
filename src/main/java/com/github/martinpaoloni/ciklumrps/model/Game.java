@@ -23,12 +23,18 @@ public class Game implements Serializable {
     private List<Round> rounds;
 
     /**
+     * The ID of the game.
+     */
+    private int id;
+
+    /**
      * Creates a new {@link Game} instance.
      *
      * @param player1 The player 1.
      * @param player2 The player 2.
      */
-    public Game(Player player1, Player player2) {
+    public Game(int id, Player player1, Player player2) {
+        this.id = id;
         this.player1 = player1;
         this.player2 = player2;
         rounds = new LinkedList<>();
@@ -62,6 +68,10 @@ public class Game implements Serializable {
     public Game restartGame() {
         rounds = new LinkedList<>();
         return this;
+    }
+
+    public int getId() {
+        return id;
     }
 
     /**

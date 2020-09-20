@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- JQuery will be required for this demo -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+    <!-- Import Twitter bootstrap libs + css -->
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js"></script>
+    <!-- Keep this simple ... define CSS for this simple webpage in the same file -->
+    <style>
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #eee;
+    }
+    .demo-form {
+      max-width: 500px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    .demo-form .demo-heading {
+      margin-bottom: 10px;
+    }
+    .centered {
+    width:50%;
+    margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+<script type="text/javascript">
+
+    $(document).ready( function() {
+
+      var btn = null;
+      var gameId = null;
+
+      $('button').click(function(){
+        btn = $(this);
+        btn.button('loading'); // Triggers the loading spinner for every button that is clicked
+      });
+
+      // Creates game at startup.
+      $.ajax({
+          type: 'POST',
+          url: '/api/game',
+          success: function(response) {
+            var game = response;
+            gameId = game.id;
+            var row = $("#statsRow");
+            $("#roundsPlayed").html(game.summary.roundsPlayed);
+            $("#p1Wins").html(game.summary.roundsWonByPlayer1);
+            $("#p2Wins").html(game.summary.roundsWonByPlayer2);
+            $("#draws").html(game.summary.roundsDraw);
+          },
+          error: function(request, status, error){
+            alert('Could not process the operation. Please, try again');
+          }
+        });
+
+
+      // Plays a round.
+      $('#gameForm').submit(function() {
+        $.ajax({
+          type: 'POST',
+          url: '/api/game/' + gameId + '/round',
+          contentType:"application/json",
+          success: function(response) {
+            var round = response;
+            var result = null;
+
+            $("#roundsPlayed").html(function(i, val) { return +val+1 });
+
+            if (round.result === 0) {
+              result = "Draw";
+              $("#draws").html(function(i, val) { return +val+1 });
+            } else if (round.result === 1) {
+              result = "Player 1 won";
+              $("#p1Wins").html(function(i, val) { return +val+1 });
+            } else if (round.result === -1) {
+              result = "Player 2 won"
+              $("#p2Wins").html(function(i, val) { return +val+1 });
+            }
+
+            var newRow = "<tr><td>" + round.player1Play + "</td><td>" + round.player2Play + "</td><td>" + result + "</td></tr>"
+            $("#roundsTableBody").append(newRow);
+
+          },
+          error: function(request, status, error){
+            alert('Could not process the operation. Please, try again');
+          }
+        }).always(function () {
+          btn.button('reset');
+        });
+        return false; // Let jQuery handle the form submission
+      });
+
+      // Restarts the game.
+      $('#statsForm').submit(function() {
+        $.ajax({
+          type: 'DELETE',
+          url: '/api/game/' + gameId + '/rounds',
+          contentType:"application/json",
+          success: function(response) {
+            var game = response;
+            var row = $("#statsRow");
+            $("#roundsPlayed").html(game.summary.roundsPlayed);
+            $("#p1Wins").html(game.summary.roundsWonByPlayer1);
+            $("#p2Wins").html(game.summary.roundsWonByPlayer2);
+            $("#draws").html(game.summary.roundsDraw);
+
+            $("#gameTable > tbody").empty();
+          },
+          error: function(request, status, error){
+            alert('Could not process the operation. Please, try again');
+          }
+        }).always(function () {
+          btn.button('reset');
+        });
+        return false; // Let jQuery handle the form submission
+      });
+
+    });
+    </script>
+<div class="container">
+    <h4>Let's play!</h4>
+    <hr>
+    <div class="panel-group" id="accordion">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title demo-heading">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#gameDiv">Rock, Paper, Scissors</a>
+                </h2>
+            </div>
+            <div id="gameDiv" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <form id="gameForm" class="demo-form" role="form" >
+                        <button type="submit" class="btn btn-lg btn-primary btn-block" data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">Play round</button>
+                        <table class="table" id="gameTable">
+                            <thead>
+                            <tr>
+                                <th scope="col">Player one's play</th>
+                                <th scope="col">Player two's play</th>
+                                <th scope="col">Result</th>
+                            </tr>
+                            </thead>
+                            <tbody id="roundsTableBody">
+
+                            </tbody>
+                        </table>
+                    </form>
+                    <form id="statsForm" class="demo-form" role="form" >
+                        <table class="table" id="statsTable">
+                            <thead>
+                            <tr>
+                                <th scope="col">Rounds played</th>
+                                <th scope="col">Player one wins</th>
+                                <th scope="col">Player two wins</th>
+                                <th scope="col">Draws</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td id="roundsPlayed">0</td>
+                                <td id="p1Wins">0</td>
+                                <td id="p2Wins">0</td>
+                                <td id="draws">0</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-lg btn-primary btn-block" data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">Restart game</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

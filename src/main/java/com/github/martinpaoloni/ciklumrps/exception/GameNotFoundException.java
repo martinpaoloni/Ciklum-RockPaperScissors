@@ -15,7 +15,7 @@ public class GameNotFoundException extends RuntimeException {
      *
      * @param id the ID of the {@link Game} that was not found.
      */
-    public GameNotFoundException(String id) {
-        super(String.format("Could not found Game with id = %s", id));
+    public GameNotFoundException(int id) {
+        super(String.format("Could not found Game with id = %d", id));
     }
 }
