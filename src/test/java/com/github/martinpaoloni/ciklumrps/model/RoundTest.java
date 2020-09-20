@@ -69,7 +69,7 @@ public class RoundTest {
     @Test
     public void equalsDifferentType() {
         Round round = new Round(ROCK, SCISSORS);
-        assertNotEquals("", round);
+        assertNotEquals(round, "");
     }
 
     @Test
@@ -86,5 +86,16 @@ public class RoundTest {
         assertNotEquals(round2, round1);
     }
 
+    @Test
+    public void equalsNull() {
+        Round round = new Round(ROCK, SCISSORS);
+        assertNotEquals(round, null);
+    }
+
+    @Test
+    public void hash() {
+        Round round = new Round(ROCK, SCISSORS);
+        round.hashCode();
+    }
 
 }
