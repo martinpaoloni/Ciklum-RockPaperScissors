@@ -20,6 +20,7 @@
     }
 
 
+
     </style>
 </head>
 <body>
@@ -117,63 +118,72 @@
 
     });
 
+
 </script>
 <div class="container">
     <h1>Rock, Paper, Scissors</h1>
     <hr>
     <h2>Let's play!</h2>
     <br>
+    <div class="row">
+        <div class="col">
+            <form id="gameForm" role="form">
+                <button type="submit" class="btn btn-primary "
+                        data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">
+                    Play round
+                </button>
+            </form>
+            <br>
+            <form id="statsForm" role="form">
+                <button type="submit" class="btn btn-primary"
+                        data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">
+                    Restart game
+                </button>
+            </form>
+            <br>
+            <table class="table" id="statsTable">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Rounds played</th>
+                    <td id="roundsPlayed">0</td>
+                </tr>
+                <tr>
+                    <th scope="row">Player one wins</th>
+                    <td id="p1Wins">0</td>
+                </tr>
+                <tr>
+                    <th scope="row">Player two wins</th>
+                    <td id="p2Wins">0</td>
+                </tr>
+                <tr>
+                    <th scope="row">Draws</th>
+                    <td id="draws">0</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <table class="table" id="gameTable">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Player one's play</th>
+                    <th scope="col">Player two's play</th>
+                    <th scope="col">Result</th>
+                </tr>
+                </thead>
+                <tbody id="roundsTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <form id="gameForm" role="form">
-        <button type="submit" class="btn btn-primary "
-                data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">
-            Play round
-        </button>
-        <br><br>
-        <table class="table" id="gameTable">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">Player one's play</th>
-                <th scope="col">Player two's play</th>
-                <th scope="col">Result</th>
-            </tr>
-            </thead>
-            <tbody id="roundsTableBody">
-            </tbody>
-        </table>
-    </form>
-    <form id="statsForm" role="form">
-        <table class="table" id="statsTable">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">Rounds played</th>
-                <td id="roundsPlayed">0</td>
-            </tr>
-            <tr>
-                <th scope="row">Player one wins</th>
-                <td id="p1Wins">0</td>
-            </tr>
-            <tr>
-                <th scope="row">Player two wins</th>
-                <td id="p2Wins">0</td>
-            </tr>
-            <tr>
-                <th scope="row">Draws</th>
-                <td id="draws">0</td>
-            </tr>
-            </tbody>
-        </table>
-        <button type="submit" class="btn btn-primary"
-                data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">
-            Restart game
-        </button>
-    </form>
+
 </div>
 </body>
 </html>
