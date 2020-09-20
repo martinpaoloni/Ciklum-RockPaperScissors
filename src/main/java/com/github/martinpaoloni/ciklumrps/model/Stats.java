@@ -78,7 +78,7 @@ public class Stats {
      *
      * @param round The {@link Round} to add to the sums.
      */
-    public void countRound(Round round) {
+    synchronized public void countRound(Round round) {
         int result = round.getResult();
         if (result == 1) {
             roundsWonByPlayer1++;

@@ -5,9 +5,9 @@ import com.github.martinpaoloni.ciklumrps.model.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -15,9 +15,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class GameController {
 
-    private Map<Integer, Game> games = new HashMap<>();
-    private Stats globalStats = new Stats();
+    private Map<Integer, Game> games = new ConcurrentHashMap<>();
     private AtomicInteger lastIdUsed = new AtomicInteger();
+    private Stats globalStats = new Stats();
 
     @GetMapping(value = "/api/game", produces = "application/json")
     public Collection<Game> listGames() {
