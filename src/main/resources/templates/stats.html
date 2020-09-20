@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- JQuery will be required for this demo -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+    <!-- Import Twitter bootstrap libs + css -->
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.js"></script>
+    <!-- Keep this simple ... define CSS for this simple webpage in the same file -->
+    <style>
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #eee;
+    }
+    .demo-form {
+      max-width: 500px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    .demo-form .demo-heading {
+      margin-bottom: 10px;
+    }
+    .centered {
+    width:50%;
+    margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+<script type="text/javascript">
+
+    $(document).ready( function() {
+
+
+      $.ajax({
+          type: 'GET',
+          url: '/api/game/stats',
+          success: function(response) {
+            var stats = response;
+            $("#roundsPlayed").html(stats.roundsPlayed);
+            $("#p1Wins").html(stats.roundsWonByPlayer1);
+            $("#p2Wins").html(stats.roundsWonByPlayer2);
+            $("#draws").html(stats.roundsDraw);
+          },
+          error: function(request, status, error){
+            alert('Could not process the operation. Please, try again');
+          }
+        });
+
+    });
+    </script>
+<div class="container">
+    <h4>Let's play!</h4>
+    <hr>
+    <div class="panel-group" id="accordion">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title demo-heading">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#gameDiv">Statistics</a>
+                </h2>
+            </div>
+            <div id="gameDiv" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <form id="statsForm" class="demo-form" role="form" >
+                        <table class="table" id="statsTable">
+                            <thead>
+                            <tr>
+                                <th scope="col">Rounds played</th>
+                                <th scope="col">Player one wins</th>
+                                <th scope="col">Player two wins</th>
+                                <th scope="col">Draws</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td id="roundsPlayed">0</td>
+                                <td id="p1Wins">0</td>
+                                <td id="p2Wins">0</td>
+                                <td id="draws">0</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
