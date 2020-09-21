@@ -25,13 +25,7 @@
 
     $(document).ready( function() {
 
-      var btn = null;
       var gameId = null;
-
-      $('button').click(function(){
-        btn = $(this);
-        btn.button('loading'); // Triggers the loading spinner for every button that is clicked
-      });
 
       // Creates game at startup.
       $.ajax({
@@ -82,8 +76,6 @@
           error: function(request, status, error){
             alert('Could not process the operation. Please, try again');
           }
-        }).always(function () {
-          btn.button('reset');
         });
         return false; // Let jQuery handle the form submission
       });
@@ -107,8 +99,6 @@
           error: function(request, status, error){
             alert('Could not process the operation. Please, try again');
           }
-        }).always(function () {
-          btn.button('reset');
         });
         return false; // Let jQuery handle the form submission
       });
@@ -126,17 +116,11 @@
     <div class="row">
         <div class="col">
             <form id="gameForm" role="form">
-                <button type="submit" class="btn btn-primary "
-                        data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">
-                    Play round
-                </button>
+                <button type="submit" class="btn btn-primary">Play round</button>
             </form>
             <br>
             <form id="statsForm" role="form">
-                <button type="submit" class="btn btn-primary"
-                        data-loading-text="<img src='http://i.giphy.com/lijuimVKUcwRa.gif' height=16 width=16 /> Processing...">
-                    Restart game
-                </button>
+                <button type="submit" class="btn btn-primary">Restart game</button>
             </form>
             <br>
             <table class="table" id="statsTable">
