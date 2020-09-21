@@ -22,6 +22,8 @@ You can run the application by executing the following command:
 mvnw spring-boot:run
 ```
 
+Add `./` to the previous command if running macOS or Linux. You may need to do a `chmod +x mvnw` in order to make it executable.
+
 After doing so, open a web broswer and point it to http://localhost:8080/ to play _Rock, Paper, Scissors_ games!
 
 You can open as many tabs as you want. Each one will start a separate game.
