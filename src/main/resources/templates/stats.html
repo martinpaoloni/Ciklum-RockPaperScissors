@@ -3,45 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- JQuery will be required for this demo -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-    <!-- Import Bootstrap libs + css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
             integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
             crossorigin="anonymous"></script>
-    <!-- Keep this simple ... define CSS for this simple webpage in the same file -->
-    <style>
-    body {
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #eee;
-    }
-    </style>
+    <script src="stats.js"></script>
 </head>
+
 <body>
-<script type="text/javascript">
-    $(document).ready( function() {
-
-      $.ajax({
-          type: 'GET',
-          url: '/api/game/stats',
-          success: function(response) {
-            var stats = response;
-            $("#roundsPlayed").html(stats.roundsPlayed);
-            $("#p1Wins").html(stats.roundsWonByPlayer1);
-            $("#p2Wins").html(stats.roundsWonByPlayer2);
-            $("#draws").html(stats.roundsDraw);
-          },
-          error: function(request, status, error){
-            alert('Could not process the operation. Please, try again');
-          }
-        });
-
-    });
-
-</script>
 <div class="container">
     <h1>Rock, Paper, Scissors</h1>
     <hr>

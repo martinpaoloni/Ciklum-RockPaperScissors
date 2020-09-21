@@ -3,111 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- JQuery will be required for this demo -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-    <!-- Import Bootstrap libs + css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
             integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
             crossorigin="anonymous"></script>
-    <!-- Keep this simple ... define CSS for this simple webpage in the same file -->
-    <style>
-      body {
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #eee;
-    }
-    </style>
+    <script src="index.js"></script>
+
 </head>
+
 <body>
-<script type="text/javascript">
-
-    $(document).ready( function() {
-
-      var gameId = null;
-
-      // Creates game at startup.
-      $.ajax({
-          type: 'POST',
-          url: '/api/game',
-          success: function(response) {
-            var game = response;
-            gameId = game.id;
-            var row = $("#statsRow");
-            $("#roundsPlayed").html(game.summary.roundsPlayed);
-            $("#p1Wins").html(game.summary.roundsWonByPlayer1);
-            $("#p2Wins").html(game.summary.roundsWonByPlayer2);
-            $("#draws").html(game.summary.roundsDraw);
-          },
-          error: function(request, status, error){
-            alert('Could not process the operation. Please, try again');
-          }
-        });
-
-
-      // Plays a round.
-      $('#gameForm').submit(function() {
-        $.ajax({
-          type: 'POST',
-          url: '/api/game/' + gameId + '/round',
-          contentType:"application/json",
-          success: function(response) {
-            var round = response;
-            var result = null;
-
-            $("#roundsPlayed").html(function(i, val) { return +val+1 });
-
-            if (round.result === 0) {
-              result = "Draw";
-              $("#draws").html(function(i, val) { return +val+1 });
-            } else if (round.result === 1) {
-              result = "Player 1 won";
-              $("#p1Wins").html(function(i, val) { return +val+1 });
-            } else if (round.result === -1) {
-              result = "Player 2 won"
-              $("#p2Wins").html(function(i, val) { return +val+1 });
-            }
-
-            var newRow = "<tr><td>" + round.player1Play + "</td><td>" + round.player2Play + "</td><td>" + result + "</td></tr>"
-            $("#roundsTableBody").append(newRow);
-
-          },
-          error: function(request, status, error){
-            alert('Could not process the operation. Please, try again');
-          }
-        });
-        return false; // Let jQuery handle the form submission
-      });
-
-      // Restarts the game.
-      $('#statsForm').submit(function() {
-        $.ajax({
-          type: 'DELETE',
-          url: '/api/game/' + gameId + '/rounds',
-          contentType:"application/json",
-          success: function(response) {
-            var game = response;
-            var row = $("#statsRow");
-            $("#roundsPlayed").html(game.summary.roundsPlayed);
-            $("#p1Wins").html(game.summary.roundsWonByPlayer1);
-            $("#p2Wins").html(game.summary.roundsWonByPlayer2);
-            $("#draws").html(game.summary.roundsDraw);
-
-            $("#gameTable > tbody").empty();
-          },
-          error: function(request, status, error){
-            alert('Could not process the operation. Please, try again');
-          }
-        });
-        return false; // Let jQuery handle the form submission
-      });
-
-    });
-
-
-
-</script>
 <div class="container">
     <h1>Rock, Paper, Scissors</h1>
     <hr>
