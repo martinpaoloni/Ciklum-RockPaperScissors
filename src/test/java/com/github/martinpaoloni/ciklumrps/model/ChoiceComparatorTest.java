@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ChoiceComparatorTest {
 
-    private ChoiceComparator choiceComparator = new ChoiceComparator();
+    private final ChoiceComparator choiceComparator = new ChoiceComparator();
 
     @Test
     public void rockBeatsScissors() {

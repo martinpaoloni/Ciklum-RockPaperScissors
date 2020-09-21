@@ -12,11 +12,11 @@ public class Game implements Serializable {
     /**
      * The player 1.
      */
-    private Player player1;
+    private final Player player1;
     /**
      * The player 2.
      */
-    private Player player2;
+    private final Player player2;
     /**
      * The rounds played.
      */
@@ -25,7 +25,7 @@ public class Game implements Serializable {
     /**
      * The ID of the game.
      */
-    private int id;
+    private final int id;
 
     /**
      * Creates a new {@link Game} instance.

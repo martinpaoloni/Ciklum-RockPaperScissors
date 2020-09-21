@@ -22,15 +22,15 @@ public class GameController {
     /**
      * Stores all games in memory.
      */
-    private Map<Integer, Game> games = new ConcurrentHashMap<>();
+    private final Map<Integer, Game> games = new ConcurrentHashMap<>();
     /**
      * Used to generate unique IDs for games.
      */
-    private AtomicInteger lastIdUsed = new AtomicInteger();
+    private final AtomicInteger lastIdUsed = new AtomicInteger();
     /**
      * Holds the global stats for all rounds played.
      */
-    private Stats globalStats = new Stats();
+    private final Stats globalStats = new Stats();
 
     /**
      * Lists all the games.

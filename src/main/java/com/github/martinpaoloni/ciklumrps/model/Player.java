@@ -10,7 +10,7 @@ public abstract class Player implements Serializable {
     /**
      * The player's name.
      */
-    private String name;
+    private final String name;
 
     /**
      * Creates a {@link Player} instance.

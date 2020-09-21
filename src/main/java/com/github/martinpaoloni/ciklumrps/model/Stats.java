@@ -28,7 +28,7 @@ public class Stats {
      * Creates a blank {@link Stats} object.
      *
      * @param roundsWonByPlayer1 The number of rounds won by player one.
-     * @param roundsDraw The number of rounds that ended in a draw.
+     * @param roundsDraw         The number of rounds that ended in a draw.
      * @param roundsWonByPlayer2 The number of rounds won by player two.
      */
     public Stats(long roundsWonByPlayer1, long roundsDraw, long roundsWonByPlayer2) {

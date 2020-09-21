@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 /**
  * Compares two {@link Choice}s.
- *
+ * <p>
  * 1 = Player 1 beats Player 2.
  * 0 = Player 1 draws with Player 2.
  * -1 = Player 2 beats Player 1.

@@ -15,6 +15,7 @@ public class GameControllerTest {
     public void before() {
         controller = new GameController();
     }
+
     @Test
     public void listGamesEmpty() {
 

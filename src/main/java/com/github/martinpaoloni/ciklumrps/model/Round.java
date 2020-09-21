@@ -10,11 +10,11 @@ public class Round implements Serializable {
     /**
      * Player one's choice.
      */
-    private Choice player1Play;
+    private final Choice player1Play;
     /**
      * Player two's choice.
      */
-    private Choice player2Play;
+    private final Choice player2Play;
 
     /**
      * Creates an instance of {@link Round}.
